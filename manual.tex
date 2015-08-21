@@ -496,6 +496,8 @@ As with normal imports (described on page \pageref{subsec:libraries}), you can a
 
 \verb^from github.daviesian.art.my_file import my_func, my_other_func^
 
+If a user's Github username is not a valid Python identifier (e.g. contains hyphens), see the \verb^github_load^ function below.
+
 \subsection{Other utilities}
 
 The \verb^tealight.utils^ library contains functions that may be of general use when writing tealight programs:
@@ -512,6 +514,10 @@ The \verb^tealight.utils^ library contains functions that may be of general use 
 \item \verb^age()^
 
 	Returns the length of time, in seconds, since your program started running.
+\item \verb^github_load(username, mode, file)^
+
+	Loads a remote file into the current file, returning a module object. Useful when the owner of the remote file has a Github username that is not a valid Python identifier.
+
 \end{bulletlist}
 
 
@@ -699,6 +705,10 @@ screen (graphics coordinates, with $y$ increasing downwards).
 
 	Draws a line from $(x_1,y_1)$ to $(x_2,y_2)$
 
+\item \verb^line_width(width)^
+
+	Sets the thickness of subsequently drawn lines.
+
 \item \verb^circle(x, y, radius)^
 
 	Draws a circle at $(x,y)$ with the specified radius
@@ -715,18 +725,35 @@ screen (graphics coordinates, with $y$ increasing downwards).
 
 	Draws a filled rectangle with top-left corner at $(x,y)$ and with the specified width and height
 
+\item \verb^polygon(vertices)^
+
+	Draws the outline of a polygon. The \verb^vertices^ argument should be a list of coordinate pairs, e.g. \verb^[(10,10), (20,10), (15,5)]^.
+
+\item \verb^fill_polygon(vertices)^
+
+	Draws a filled of a polygon. The \verb^vertices^ argument should be a list of coordinate pairs, e.g. \verb^[(10,10), (20,10), (15,5)]^.
+
+\item \verb^test_polygon(x, y, vertices)^
+
+	Returns \verb^True^ if the point $(x,y)$ lies inside the polygon defined by \verb^vertices^, otherwise returns \verb^False^. The \verb^vertices^ argument should be a list of coordinate pairs, e.g. \verb^[(10,10), (20,10), (15,5)]^.
+
 \item \verb^image(x, y, file)^
 
 	Draws one of the built-in images, listed on page \pageref{images}. The top-left corner is at $(x,y)$
 \item \verb^text(x, y, string)^
 
 	Draws the specified string at $(x,y)$. This is useful for writing any text to the screen.
+
+\item \verb^font(f)^
+
+	Sets the current font used by the \verb^text^ function. The argument \verb^f^ should be a string describing the font, e.g. \verb^"36px Verdana"^.
+
 \item \verb^background(file)^
 
 	Fills the screen with one of the built-in backgrounds, listed on page \pageref{backgrounds}
 \item \verb^color(c)^
 
-	Changes the current colour used by all the drawing functions. Use colour names (\verb^red^, \verb^green^, etc.), hexadecimal colours (\verb^#ffea6d^, \verb^#FF0^, etc.), RGBA colours (e.g. \verb^rgba(255,128,0,0.5)^) or HSL colours (e.g. \verb^hsl(255,100%,50%)^).
+	Changes the current colour used by all the drawing functions. Use colour names (\verb^"red"^, \verb^"green"^, etc.), hexadecimal colours (\verb^"#ffea6d"^, \verb^"#FF0"^, etc.), RGBA colours (e.g. \verb^"rgba(255,128,0,0.5)"^) or HSL colours (e.g. \verb^"hsl(255,100%,50%)"^).
 \end{bulletlist}
 
 \subsection{Constants}
